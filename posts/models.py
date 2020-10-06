@@ -41,6 +41,7 @@ class Comment(models.Model):
 
 
 class Post(models.Model):
+    categories = models.ManyToManyField(Category)
     title = models.CharField(max_length=100)
     overview = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -49,7 +50,6 @@ class Post(models.Model):
     view_count = models.IntegerField(default = 0)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     thumbnail = models.ImageField()
-    categories = models.ManyToManyField(Category)
     featured = models.BooleanField()
     previous_post = models.ForeignKey(
         'self', related_name='previous', on_delete=models.SET_NULL, blank=True, null=True)
